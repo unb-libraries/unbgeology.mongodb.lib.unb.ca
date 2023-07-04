@@ -1,0 +1,24 @@
+dockworker:
+  version: '5'
+  application:
+    name: unbgeology.mongodb.lib.unb.ca
+    finish_marker: 'Waiting for connections'
+    project_prefix: IN
+    upstream_images:
+      - mongo:5.0
+    uuid: 3512
+  deployment:
+    environments:
+      - testing
+    workflow:
+      source: dockworker
+      type: deployment-workflow
+  github:
+    repo: unbgeology.mongodb.lib.unb.ca
+    owner: unb-libraries
+  image:
+    push_branches:
+      - testing
+    name: ghcr.io/unb-libraries/unbgeology.mongodb.lib.unb.ca
+    date_tag_image: true
+    repository: ghcr
