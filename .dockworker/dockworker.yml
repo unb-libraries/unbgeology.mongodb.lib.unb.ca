@@ -9,7 +9,8 @@ dockworker:
     uuid: 3512
   deployment:
     environments:
-      - testing
+      - dev
+      - prod
     workflow:
       source: dockworker
       type: deployment-workflow
@@ -18,7 +19,8 @@ dockworker:
     owner: unb-libraries
   image:
     push_branches:
-      - testing
+      - dev
+      - prod
     name: ghcr.io/unb-libraries/unbgeology.mongodb.lib.unb.ca
     date_tag_image: true
     repository: ghcr

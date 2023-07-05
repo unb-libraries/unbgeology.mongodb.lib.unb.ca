@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongodb
+    appMajor: "5"
+    instance: unbgeology.mongodb.lib.unb.ca
+    tier: database
+    uri: unbgeology.mongodb.lib.unb.ca
+    vcsOwner: unb-libraries
+    vcsRepository: unbgeology.mongodb.lib.unb.ca
+    vcsRef: dev
+  name: unbgeology-mongodb-lib-unb-ca
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      uri: unbgeology.mongodb.lib.unb.ca
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        appMajor: "5"
+        instance: unbgeology.mongodb.lib.unb.ca
+        tier: database
+        uri: unbgeology.mongodb.lib.unb.ca
+        vcsOwner: unb-libraries
+        vcsRepository: unbgeology.mongodb.lib.unb.ca
+        vcsRef: dev
+    spec:
+      nodeSelector:
+        deployenv: prod
+      containers:
+        -
+          env:
+            -
+              name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: root-username
+            -
+              name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: root-password
+          image: "||DEPLOYMENTIMAGE||"
+          imagePullPolicy: Always
+          name: unbgeology-mongodb-lib-unb-ca
+          ports:
+            -
+              containerPort: 27017
+              name: mongodb
+          volumeMounts:
+            -
+              mountPath: /data/db
+              name: mongodb-persistent-storage
+      priorityClassName: vip-support
+      imagePullSecrets:
+        -
+          name: github-container-registry-auth
+      restartPolicy: Always
+      volumes:
+        -
+          name: mongodb-persistent-storage
+          persistentVolumeClaim:
+            claimName: unbgeology-mongodb-lib-unb-ca

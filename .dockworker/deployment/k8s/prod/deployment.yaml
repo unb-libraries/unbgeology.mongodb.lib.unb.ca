@@ -9,9 +9,9 @@ metadata:
     uri: unbgeology.mongodb.lib.unb.ca
     vcsOwner: unb-libraries
     vcsRepository: unbgeology.mongodb.lib.unb.ca
-    vcsRef: testing
+    vcsRef: prod
   name: unbgeology-mongodb-lib-unb-ca
-  namespace: testing
+  namespace: prod
 spec:
   selector:
     matchLabels:
@@ -30,7 +30,7 @@ spec:
         uri: unbgeology.mongodb.lib.unb.ca
         vcsOwner: unb-libraries
         vcsRepository: unbgeology.mongodb.lib.unb.ca
-        vcsRef: testing
+        vcsRef: prod
     spec:
       nodeSelector:
         deployenv: prod
