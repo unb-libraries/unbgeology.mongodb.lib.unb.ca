@@ -1,4 +1,4 @@
-FROM mongo:6.0
+FROM mongo:4
 MAINTAINER UNB Libraries <libsupport@unb.ca>
 
 ENV TZ America/Moncton
