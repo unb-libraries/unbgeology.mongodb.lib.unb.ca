@@ -10,5 +10,6 @@ services:
       - "27017"
     volumes:
       - mongodb-data:/var/lib/mongodb
+    command: ["--replSet", "rs0", "--bind_ip_all"]
 volumes:
   mongodb-data:

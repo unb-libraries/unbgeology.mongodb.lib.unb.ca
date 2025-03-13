@@ -1,11 +1,9 @@
-FROM mongo:4
-MAINTAINER UNB Libraries <libsupport@unb.ca>
-
+FROM mongo:8.0.5
 ENV TZ America/Moncton
 
 COPY ./build /build
-
-# CMD ["--config", "/build/conf/mongod.custom.conf"]
+RUN mv /build/scripts/* /docker-entrypoint-initdb.d/ && \
+  rm -rf /build/scripts
 
 LABEL ca.unb.lib.generator="mongodb" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
