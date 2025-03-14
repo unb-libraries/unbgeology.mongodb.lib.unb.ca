@@ -2,8 +2,10 @@ FROM mongo:8.0.5
 ENV TZ America/Moncton
 
 COPY ./build /build
-RUN mv /build/scripts/* /docker-entrypoint-initdb.d/ && \
-  rm -rf /build/scripts
+RUN mv /build/scripts /scripts && \
+  mv /build/docker-entrypoint-initdb.d/* /docker-entrypoint-initdb.d
+
+CMD ["--replSet", "rs0"]
 
 LABEL ca.unb.lib.generator="mongodb" \
   com.microscaling.docker.dockerfile="/Dockerfile" \

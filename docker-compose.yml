@@ -1,15 +1,26 @@
 services:
   unbgeology.mongodb.lib.unb.ca:
+    image: unbgeology/mongo:8.x
     build:
       context: .
     env_file:
       - ./env/mongodb.env
     restart: unless-stopped
     container_name: unbgeology.mongodb.lib.unb.ca
-    expose:
-      - "27017"
+    ports:
+      - 27017:27017
+    extra_hosts:
+      - host.docker.internal:host-gateway
     volumes:
-      - mongodb-data:/var/lib/mongodb
-    command: ["--replSet", "rs0", "--bind_ip_all"]
+      - mongodb-data:/data/db
+      - mongodb-config:/data/configdb
+    networks:
+      - unbgeology.mongodb.lib.unb.ca
+
 volumes:
   mongodb-data:
+  mongodb-config:
+
+networks:
+  unbgeology.mongodb.lib.unb.ca:
+    name: unbgeology.mongodb.lib.unb.ca
