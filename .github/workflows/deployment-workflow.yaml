@@ -14,7 +14,6 @@ jobs:
       deploy-branches: '["dev","prod"]'
       image-name: 'ghcr.io/unb-libraries/unbgeology.mongodb.lib.unb.ca'
       k8s-deployment-name: 'unbgeology-mongodb-lib-unb-ca'
-      platforms: linux/amd64
       push-branches: '["dev","prod","8.x"]'
     secrets:
       KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
