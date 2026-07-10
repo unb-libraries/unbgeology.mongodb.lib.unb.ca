@@ -1,6 +1,6 @@
 FROM mongo:4
 
-ENV TZ America/Moncton
+ENV TZ="America/Moncton"
 
 COPY ./build /build
 
